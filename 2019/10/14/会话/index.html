@@ -7,18 +7,18 @@
   
   <title>会话 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="会话12345现状： http是无状态的。每一次请求都是独立，不会记忆上一次请求的信息。目标：用户登陆之后才能访问页面（就要区别出于，当前用户是否登陆）; 在多个页面之间共享数据；解决方案：通过会话技术 ，让http变得&amp;quot;有记忆&amp;quot;- cookie- session  cookie、session原理1234567cookie原理：- 从服务器端向客户端浏览器留下信息；- 浏览器">
+  <meta name="description" content="会话现状： http是无状态的。每一次请求都是独立，不会记忆上一次请求的信息。 目标：用户登陆之后才能访问页面（就要区别出于，当前用户是否登陆）; 在多个页面之间共享数据； 解决方案：通过会话技术 ，让http变得”有记忆”  cookie session  cookie、session原理cookie原理：  从服务器端向客户端浏览器留下信息； 浏览器每次访问服务器时都带上这些信息；  sess">
 <meta name="keywords" content="会话">
 <meta property="og:type" content="article">
 <meta property="og:title" content="会话">
 <meta property="og:url" content="http://yoursite.com/2019/10/14/会话/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="会话12345现状： http是无状态的。每一次请求都是独立，不会记忆上一次请求的信息。目标：用户登陆之后才能访问页面（就要区别出于，当前用户是否登陆）; 在多个页面之间共享数据；解决方案：通过会话技术 ，让http变得&amp;quot;有记忆&amp;quot;- cookie- session  cookie、session原理1234567cookie原理：- 从服务器端向客户端浏览器留下信息；- 浏览器">
+<meta property="og:description" content="会话现状： http是无状态的。每一次请求都是独立，不会记忆上一次请求的信息。 目标：用户登陆之后才能访问页面（就要区别出于，当前用户是否登陆）; 在多个页面之间共享数据； 解决方案：通过会话技术 ，让http变得”有记忆”  cookie session  cookie、session原理cookie原理：  从服务器端向客户端浏览器留下信息； 浏览器每次访问服务器时都带上这些信息；  sess">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-14T02:19:05.349Z">
+<meta property="og:updated_time" content="2019-10-14T02:21:41.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="会话">
-<meta name="twitter:description" content="会话12345现状： http是无状态的。每一次请求都是独立，不会记忆上一次请求的信息。目标：用户登陆之后才能访问页面（就要区别出于，当前用户是否登陆）; 在多个页面之间共享数据；解决方案：通过会话技术 ，让http变得&amp;quot;有记忆&amp;quot;- cookie- session  cookie、session原理1234567cookie原理：- 从服务器端向客户端浏览器留下信息；- 浏览器">
+<meta name="twitter:description" content="会话现状： http是无状态的。每一次请求都是独立，不会记忆上一次请求的信息。 目标：用户登陆之后才能访问页面（就要区别出于，当前用户是否登陆）; 在多个页面之间共享数据； 解决方案：通过会话技术 ，让http变得”有记忆”  cookie session  cookie、session原理cookie原理：  从服务器端向客户端浏览器留下信息； 浏览器每次访问服务器时都带上这些信息；  sess">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -87,19 +87,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">现状： http是无状态的。每一次请求都是独立，不会记忆上一次请求的信息。</span><br><span class="line">目标：用户登陆之后才能访问页面（就要区别出于，当前用户是否登陆）; 在多个页面之间共享数据；</span><br><span class="line">解决方案：通过会话技术 ，让http变得&quot;有记忆&quot;</span><br><span class="line">- cookie</span><br><span class="line">- session</span><br></pre></td></tr></table></figure>
+        <h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h2><p>现状： http是无状态的。每一次请求都是独立，不会记忆上一次请求的信息。</p>
+<p>目标：用户登陆之后才能访问页面（就要区别出于，当前用户是否登陆）; 在多个页面之间共享数据；</p>
+<p>解决方案：通过会话技术 ，让http变得”有记忆”</p>
+<ul>
+<li>cookie</li>
+<li>session</li>
+</ul>
+<h3 id="cookie、session原理"><a href="#cookie、session原理" class="headerlink" title="cookie、session原理"></a>cookie、session原理</h3><p>cookie原理：</p>
+<ul>
+<li>从服务器端向客户端浏览器留下信息；</li>
+<li>浏览器每次访问服务器时都带上这些信息；</li>
+</ul>
+<p>session原理：</p>
+<ul>
+<li>服务器端会为每个用户（浏览器）各自保存一个session（文件）。当服务器保存session之后，会以cookie的形式告诉浏览器，你的session号是哪一个。它把session号返回给了浏览器，而把真实的数据保存在服务器。</li>
+<li>下次再来访问服务器的时候，浏览器就会带着它自己的session号去访问，服务器根据session号就可以找到对应的session了。</li>
+</ul>
+<h4 id="cookie和session的优缺点"><a href="#cookie和session的优缺点" class="headerlink" title="cookie和session的优缺点"></a>cookie和session的优缺点</h4><p>​    cookie：优点是节省服务器空间，缺点不安全。不要保存敏感信息。</p>
+<p>​    session：优点是安全，缺点需要服务器空间， 是一种最常见的解决方案。</p>
+<h4 id="Cookie和Session之间的区别"><a href="#Cookie和Session之间的区别" class="headerlink" title="Cookie和Session之间的区别"></a>Cookie和Session之间的区别</h4><ol>
+<li>Cookie数据存放在客户的浏览器(本地),session数据放在服务器上</li>
+<li>Cookie不如session安全，别人可以分析存放在本地的Cookie并进行Cookie欺骗,所以出于安全性的考虑应当使用Session</li>
+<li>Session会在一定时间内保存在服务器上。当访问增多,会占用较多的服务器资源,所以出于性能考虑则应当使用Cookie</li>
+<li>单个cookie保存的数据不能超过4k,很多浏览器都限制一个站点最多保存20个cookie.实际上为了性能考虑,不论是cookie还是session,其中的信息都应当短小精悍</li>
+<li>session因为是保存在服务器上,所以不支持跨域的访问</li>
+</ol>
+<h4 id="使用cookie和session的具体场景"><a href="#使用cookie和session的具体场景" class="headerlink" title="使用cookie和session的具体场景"></a>使用cookie和session的具体场景</h4><ol>
+<li>一般来说,登陆验证信息,客户的私人信息,如姓名,电话等,应该放在Session中.</li>
+<li>Cookie则用于用户登陆网站时的自动登陆以及类似”购物车”的处理.使用Cookie保存信息时最好通过加密形式来保存数据,同时是否保存登陆信息,需要由用户自行选择</li>
+</ol>
 
-<h3 id="cookie、session原理"><a href="#cookie、session原理" class="headerlink" title="cookie、session原理"></a>cookie、session原理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cookie原理：</span><br><span class="line">- 从服务器端向客户端浏览器留下信息；</span><br><span class="line">- 浏览器每次访问服务器时都带上这些信息；</span><br><span class="line"></span><br><span class="line">session原理：</span><br><span class="line">- 服务器端会为每个用户（浏览器）各自保存一个session（文件）。当服务器保存session之后，会以cookie的形式告诉浏览器，你的session号是哪一个。它把session号返回给了浏览器，而把真实的数据保存在服务器。</span><br><span class="line">- 下次再来访问服务器的时候，浏览器就会带着它自己的session号去访问，服务器根据session号就可以找到对应的session了。</span><br></pre></td></tr></table></figure>
-
-<h4 id="cookie和session的优缺点"><a href="#cookie和session的优缺点" class="headerlink" title="cookie和session的优缺点"></a>cookie和session的优缺点</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cookie：优点是节省服务器空间，缺点不安全。不要保存敏感信息。</span><br><span class="line"></span><br><span class="line">session：优点是安全，缺点需要服务器空间， 是一种最常见的解决方案。</span><br></pre></td></tr></table></figure>
-
-<h4 id="Cookie和Session之间的区别"><a href="#Cookie和Session之间的区别" class="headerlink" title="Cookie和Session之间的区别"></a>Cookie和Session之间的区别</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. Cookie数据存放在客户的浏览器(本地),session数据放在服务器上</span><br><span class="line"></span><br><span class="line">2. Cookie不如session安全，别人可以分析存放在本地的Cookie并进行Cookie欺骗,所以出于安全性的考虑应当使用Session</span><br><span class="line"></span><br><span class="line">3. Session会在一定时间内保存在服务器上。当访问增多,会占用较多的服务器资源,所以出于性能考虑则应当使用Cookie</span><br><span class="line"></span><br><span class="line">4. 单个cookie保存的数据不能超过4k,很多浏览器都限制一个站点最多保存20个cookie.实际上为了性能考虑,不论是cookie还是session,其中的信息都应当短小精悍</span><br><span class="line"></span><br><span class="line">5. session因为是保存在服务器上,所以不支持跨域的访问</span><br></pre></td></tr></table></figure>
-
-<h4 id="使用cookie和session的具体场景"><a href="#使用cookie和session的具体场景" class="headerlink" title="使用cookie和session的具体场景"></a>使用cookie和session的具体场景</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 一般来说,登陆验证信息,客户的私人信息,如姓名,电话等,应该放在Session中</span><br><span class="line"></span><br><span class="line">2. Cookie则用于用户登陆网站时的自动登陆以及类似<span class="string">"购物车"</span>的处理.使用Cookie保存信息时最好通过加密形式来保存数据,同时是否保存登陆信息,需要由用户自行选择</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/会话/" data-id="ck1psh6yp000314ts9m9ijb6w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/会话/" data-id="ck1pskiwu0002vctshlqvcnag" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/会话/">会话</a></li></ul>
