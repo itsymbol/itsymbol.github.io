@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>session代码 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="sessionsession 从字面上讲，就是会话。这个就类似于你和一个人交谈，你怎么知道当前和你交谈的是张三而不是李四呢？对方肯定有某种特征（长相等）表明他就是张三。 session 也是类似的道理，服务器要知道当前发请求给自己的是谁。为了做这种区分，服务器就要给每个客户端分配不同的“身份标识”，然后客户端每次向服务器发请求的时候，都带上这个“身份标识”，服务器就知道这个请求来自于谁了。至于客户">
+<meta name="keywords" content="session代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="session代码">
+<meta property="og:url" content="http://yoursite.com/2019/10/14/session代码/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="sessionsession 从字面上讲，就是会话。这个就类似于你和一个人交谈，你怎么知道当前和你交谈的是张三而不是李四呢？对方肯定有某种特征（长相等）表明他就是张三。 session 也是类似的道理，服务器要知道当前发请求给自己的是谁。为了做这种区分，服务器就要给每个客户端分配不同的“身份标识”，然后客户端每次向服务器发请求的时候，都带上这个“身份标识”，服务器就知道这个请求来自于谁了。至于客户">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-14T02:36:43.829Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="session代码">
+<meta name="twitter:description" content="sessionsession 从字面上讲，就是会话。这个就类似于你和一个人交谈，你怎么知道当前和你交谈的是张三而不是李四呢？对方肯定有某种特征（长相等）表明他就是张三。 session 也是类似的道理，服务器要知道当前发请求给自己的是谁。为了做这种区分，服务器就要给每个客户端分配不同的“身份标识”，然后客户端每次向服务器发请求的时候，都带上这个“身份标识”，服务器就知道这个请求来自于谁了。至于客户">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-session代码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/14/session代码/" class="article-date">
+  <time datetime="2019-10-14T02:31:06.000Z" itemprop="datePublished">2019-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      session代码
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="session"><a href="#session" class="headerlink" title="session"></a>session</h2><p>session 从字面上讲，就是会话。这个就类似于你和一个人交谈，你怎么知道当前和你交谈的是张三而不是李四呢？对方肯定有某种特征（长相等）表明他就是张三。</p>
+<p>session 也是类似的道理，服务器要知道当前发请求给自己的是谁。为了做这种区分，服务器就要给每个客户端分配不同的“身份标识”，然后客户端每次向服务器发请求的时候，都带上这个“身份标识”，服务器就知道这个请求来自于谁了。至于客户端怎么保存这个“身份标识”，可以有很多种方式，对于浏览器客户端，默认采用 cookie 的方式来保存这个身份标记。</p>
+<p>服务器使用session把用户的信息临时保存在了服务器上，用户离开网站后session会被销毁。这种用户信息存储方式相对cookie来说更安全，可是session有一个缺陷：如果web服务器做了负载均衡，那么下一个操作请求到了另一台服务器的时候session会丢失。或者服务器重启了session数据也会丢失。</p>
+<p>工作原理：</p>
+<ul>
+<li><p>真实的数据保存在服务器上，只通过cookie保存一个编号。</p>
+</li>
+<li><p>每次请求，带上cookie(带上这个编号) ，在服务器 收到请求之后，通过编号，在服务器内存中查出来真实的数据。</p>
+</li>
+<li><p>设置session</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app.post(&apos;/loginAPI&apos;, (req, res) =&gt; &#123;</span><br><span class="line">    // 此处省略用户信息校验</span><br><span class="line">    // 直接通过req.session来设置</span><br><span class="line">	req.session.isLogin = true;</span><br><span class="line">    req.session.name = req.body.username;</span><br><span class="line">    res.end()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取session</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/index.html'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(req.session)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除session</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/quit'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    req.session.destroy();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>测试请求是否携带cookie</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/testcookie'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 检测本次请求是否携带了cookie</span></span><br><span class="line">  <span class="comment">// console.log(req.headers.cookie);</span></span><br><span class="line">  <span class="built_in">console</span>.log(req.cookies);</span><br><span class="line">  res.end(req.headers.cookie);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>客户端设置Cookie</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/setcookie'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  <span class="comment">//服务器 向 客户端设置cookie</span></span><br><span class="line">  <span class="comment">// cookies: name=abcdddddddd</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// res.setHeader('set-cookie', 'name=ab');</span></span><br><span class="line">  res.setHeader(<span class="string">'set-cookie'</span>, [<span class="string">'name=curry'</span>, <span class="string">'age=30'</span>, <span class="string">'age1=310'</span>]);</span><br><span class="line"></span><br><span class="line">  res.end(<span class="string">'setcookie'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>检测用户是否登陆</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/checklogin'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  <span class="comment">//如果本次请求是登陆之后再发，则它会带cookie，保存是session编号</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 取出session</span></span><br><span class="line">  <span class="built_in">console</span>.log(req.session);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> loginname = req.session.loginname;</span><br><span class="line">  <span class="keyword">if</span> (loginname) &#123;</span><br><span class="line">    res.json(&#123; <span class="attr">code</span>: <span class="number">200</span>, loginname, <span class="attr">msg</span>: <span class="string">'已登陆'</span> &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    res.json(&#123; <span class="attr">code</span>: <span class="number">500</span>, <span class="attr">msg</span>: <span class="string">'没有登陆'</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用户登陆</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="string">'/login'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 1.获取用户传递参数</span></span><br><span class="line">  <span class="keyword">let</span> &#123; name, password &#125; = req.body;</span><br><span class="line">  <span class="comment">// 2.去USER检查这个人是存在</span></span><br><span class="line">  <span class="keyword">let</span> rs = USER.find(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (item.name == name &amp;&amp; item.password == password) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">if</span> (rs) &#123;</span><br><span class="line">    <span class="comment">// 设置session</span></span><br><span class="line">    req.session.loginname = name;</span><br><span class="line">    req.session.abc = <span class="number">100</span>;</span><br><span class="line">    res.json(&#123; <span class="attr">code</span>: <span class="number">200</span>, <span class="attr">msg</span>: <span class="string">'登陆成功'</span>, <span class="attr">name</span>: name &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    res.json(&#123; <span class="attr">code</span>: <span class="number">500</span>, <span class="attr">msg</span>: <span class="string">'登陆失败'</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用户退出</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/logout'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 删除session</span></span><br><span class="line">  req.session.destroy();</span><br><span class="line">  res.json(&#123; <span class="attr">code</span>: <span class="number">200</span>, <span class="attr">msg</span>: <span class="string">'退出成功'</span> &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/14/session代码/" data-id="ck1pt3wrk0004jkts1dfd2n77" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/session代码/">session代码</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/14/Cookie代码/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Cookie代码</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie代码/">Cookie代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm和nrm基本命令/">npm和nrm基本命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session代码/">session代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/会话/">会话</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Cookie代码/" style="font-size: 10px;">Cookie代码</a> <a href="/tags/npm和nrm基本命令/" style="font-size: 10px;">npm和nrm基本命令</a> <a href="/tags/session代码/" style="font-size: 10px;">session代码</a> <a href="/tags/会话/" style="font-size: 10px;">会话</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/10/14/session代码/">session代码</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/14/Cookie代码/">Cookie代码</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/14/会话/">会话</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/11/npm基本命令/">npm和nrm基本命令</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
