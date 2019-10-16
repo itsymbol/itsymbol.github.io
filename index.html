@@ -62,6 +62,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-promise案例" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/16/promise案例/" class="article-date">
+  <time datetime="2019-10-16T01:39:14.000Z" itemprop="datePublished">2019-10-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/16/promise案例/">promise案例</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="回调地狱"><a href="#回调地狱" class="headerlink" title="回调地狱"></a>回调地狱</h2><p>什么是回调地狱(函数作为参数层层嵌套)</p>
+<p>什么是回调函数(一个函数作为参数需要依赖另一个函数执行调用)</p>
+<p>如下示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="comment">//用异步代码，依次读出三个文件1.txt,2.txt,3.txt，并显示内容</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 回调地狱</span></span><br><span class="line">fs.readFile(<span class="string">'1.txt'</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'error'</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line"></span><br><span class="line">    fs.readFile(<span class="string">'2.txt'</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'error'</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(data);</span><br><span class="line"></span><br><span class="line">        fs.readFile(<span class="string">'3.txt'</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (err) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'error'</span>);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(data);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="promise读取文件，解决回调地狱"><a href="#promise读取文件，解决回调地狱" class="headerlink" title="promise读取文件，解决回调地狱"></a>promise读取文件，解决回调地狱</h2><p>// 把一个异步的带回调函数的功能改写成promise。<br>// 1. 新建一个空模板<br>// function fnname(XXXXX){<br>//      var p = new Promise((resolve,reject)=&gt;{<br>//  })<br>//      return p;<br>//  }<br>//2.把功能代码放入new Promise的构造器中,根据实际情况调用resolve,reject给实参<br>//3. fnname().then()</p>
+<p>如下示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="comment">//用异步代码，依次读出三个文件1.txt,2.txt,3.txt，并显示内容</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myreadfile</span>(<span class="params">filepath</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.readFile(filepath, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        reject(err);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        resolve(data);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">myreadfile(<span class="string">'1.txt'</span>)</span><br><span class="line">  .then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//data 就是读出第一个文件的结果</span></span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    <span class="keyword">return</span> myreadfile(<span class="string">'2.txt'</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//data 就是读出第二个文件的结果</span></span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    <span class="keyword">return</span> myreadfile(<span class="string">'3.txt'</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//data 就是读出第三个文件的结果</span></span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="async读取文件，解决回调地狱"><a href="#async读取文件，解决回调地狱" class="headerlink" title="async读取文件，解决回调地狱"></a>async读取文件，解决回调地狱</h2><p>如下示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="comment">//用异步代码，依次读出三个文件1.txt,2.txt,3.txt，并显示内容</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myreadfile</span>(<span class="params">filepath</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.readFile(filepath, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        reject(err);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        resolve(data);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">read3</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> str1 = <span class="keyword">await</span> myreadfile(<span class="string">'1.txt'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(str1);</span><br><span class="line">  <span class="keyword">var</span> str2 = <span class="keyword">await</span> myreadfile(<span class="string">'2.txt'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(str2);</span><br><span class="line">  <span class="keyword">var</span> str3 = <span class="keyword">await</span> myreadfile(<span class="string">'3.txt'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(str3);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">read3();</span><br></pre></td></tr></table></figure>
+
+<h2 id="promise与Ajax配合使用"><a href="#promise与Ajax配合使用" class="headerlink" title="promise与Ajax配合使用"></a>promise与Ajax配合使用</h2><p>如下示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">login</span>(<span class="params">name, password</span>) </span>&#123;</span><br><span class="line">    <span class="comment">/// $.ajax的返回值是一个非标准的promise对象</span></span><br><span class="line">    <span class="comment">// 但它的方法 catch,then 还是可以使用的</span></span><br><span class="line">    <span class="keyword">var</span> p = $.ajax(&#123;</span><br><span class="line">      crossDomain: <span class="literal">true</span>, <span class="comment">//跨域</span></span><br><span class="line">      xhrFields: &#123;</span><br><span class="line">        withCredentials: <span class="literal">true</span> <span class="comment">// 允许携带cookie</span></span><br><span class="line">      &#125;,</span><br><span class="line">      url: <span class="string">'http://localhost:8080/login'</span>,</span><br><span class="line">      type: <span class="string">'post'</span>,</span><br><span class="line">      data: &#123;</span><br><span class="line">        name: name,</span><br><span class="line">        password</span><br><span class="line">      &#125;,</span><br><span class="line">      error: <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        reject(err);</span><br><span class="line">      &#125;,</span><br><span class="line">      success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        resolve(res);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">console</span>.dir(p);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">login</span>(<span class="params">name, password</span>) </span>&#123;</span><br><span class="line">    <span class="comment">/// $.ajax的返回值是一个非标准的promise对象</span></span><br><span class="line">    <span class="comment">// 但它的方法 catch,then 还是可以使用的</span></span><br><span class="line">    <span class="keyword">return</span> $.ajax(&#123;</span><br><span class="line">      crossDomain: <span class="literal">true</span>, <span class="comment">//跨域</span></span><br><span class="line">      xhrFields: &#123;</span><br><span class="line">        withCredentials: <span class="literal">true</span> <span class="comment">// 允许携带cookie</span></span><br><span class="line">      &#125;,</span><br><span class="line">      url: <span class="string">'http://localhost:8080/login'</span>,</span><br><span class="line">      type: <span class="string">'post'</span>,</span><br><span class="line">      data: &#123;</span><br><span class="line">        name: name,</span><br><span class="line">        password</span><br><span class="line">      &#125;,</span><br><span class="line">      error: <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">          reject(err);</span><br><span class="line">      &#125;,</span><br><span class="line">      success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">          resolve(res);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="promise应用连接数据库"><a href="#promise应用连接数据库" class="headerlink" title="promise应用连接数据库"></a>promise应用连接数据库</h2><p>如下示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//连接数据库工具类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">exeSqlPromise</span>(<span class="params">sql</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;      ⭐</span><br><span class="line">    <span class="keyword">var</span> mysql = <span class="built_in">require</span>(<span class="string">'mysql'</span>);</span><br><span class="line">    <span class="keyword">var</span> connection = mysql.createConnection(&#123;</span><br><span class="line">      host: <span class="string">'localhost'</span>,</span><br><span class="line">      user: <span class="string">'root'</span>,</span><br><span class="line">      password: <span class="string">'root'</span>,</span><br><span class="line">      database: <span class="string">'message'</span> <span class="comment">//你要连接的数据库名字</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    connection.connect();</span><br><span class="line">    <span class="comment">// 检查  用户名 小王，密码 123 是否正确</span></span><br><span class="line">    <span class="comment">// let sql = 'select * from users where username="小王" and userpassword="123"';</span></span><br><span class="line">    connection.query(sql, <span class="function"><span class="keyword">function</span>(<span class="params">error, results, fields</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// fields,表示本次操作涉及的字段</span></span><br><span class="line">      <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        reject(error);   ⭐</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        resolve(results);   ⭐</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    connection.end();</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> p;     ⭐</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//接口调用</span></span><br><span class="line">app.post(<span class="string">'/login'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 1.获取用户传递参数</span></span><br><span class="line">  <span class="keyword">let</span> &#123; name, password &#125; = req.body;</span><br><span class="line">  <span class="keyword">let</span> sql = <span class="string">`select * from users where username="<span class="subst">$&#123;name&#125;</span>" and userpassword="<span class="subst">$&#123;password&#125;</span>"`</span>;</span><br><span class="line">  sqltool.exeSqlPromise(sql).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;  ⭐</span><br><span class="line">      <span class="keyword">if</span> (data.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        req.session.loginname = name;</span><br><span class="line">        res.json(&#123; <span class="attr">code</span>: <span class="number">200</span>, <span class="attr">msg</span>: <span class="string">'登陆成功'</span>, <span class="attr">name</span>: name &#125;);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        res.json(&#123; <span class="attr">code</span>: <span class="number">500</span>, <span class="attr">msg</span>: <span class="string">'登陆失败'</span> &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;  ⭐</span><br><span class="line">      <span class="built_in">console</span>.log(err);</span><br><span class="line">      res.json(&#123; <span class="attr">code</span>: <span class="number">500</span>, <span class="attr">msg</span>: <span class="string">'服务器查询sql出错啦'</span> &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/16/promise案例/" data-id="ck1slyqzz00015ktsa6beqtqn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/promise案例/">promise案例</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-js练习题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/10/15/js练习题/" class="article-date">
@@ -152,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/15/js练习题/" data-id="ck1rffn12000bk8tsc85x2bxo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/15/js练习题/" data-id="ck1slyr0p000d5ktslg3uuvz9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js练习题/">js练习题</a></li></ul>
@@ -332,7 +388,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/promise/" data-id="ck1rffn13000dk8tsxks2g6vj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/promise/" data-id="ck1slyr0n000b5ktsj5h80uea" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/promise/">promise</a></li></ul>
@@ -419,7 +475,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/session代码/" data-id="ck1rffn0m0004k8tsubnn5ou3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/session代码/" data-id="ck1slyr0l000a5ktsgjxv5zur" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/session代码/">session代码</a></li></ul>
@@ -505,7 +561,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/Cookie代码/" data-id="ck1rffn0c0000k8ts2lg91cgs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/Cookie代码/" data-id="ck1slyr0500045ktscorg5pgy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cookie代码/">Cookie代码</a></li></ul>
@@ -573,7 +629,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/会话/" data-id="ck1rffn10000ak8tsoxt9qgfv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/会话/" data-id="ck1slyr0q000e5ktsj53t24x2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/会话/">会话</a></li></ul>
@@ -638,7 +694,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/11/npm基本命令/" data-id="ck1rffn0k0003k8tssvkz6wl6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/11/npm基本命令/" data-id="ck1slyr0200025ktskfg61fvu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm和nrm基本命令/">npm和nrm基本命令</a></li></ul>
@@ -689,7 +745,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/19/hello-world/" data-id="ck1rffn0h0001k8tse2ed5kxj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/19/hello-world/" data-id="ck1slyqzv00005kts5tftq2ik" class="article-share-link">Share</a>
       
       
     </footer>
@@ -712,7 +768,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie代码/">Cookie代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js练习题/">js练习题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm和nrm基本命令/">npm和nrm基本命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/promise/">promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session代码/">session代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/会话/">会话</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie代码/">Cookie代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js练习题/">js练习题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm和nrm基本命令/">npm和nrm基本命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/promise/">promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/promise案例/">promise案例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session代码/">session代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/会话/">会话</a></li></ul>
     </div>
   </div>
 
@@ -722,7 +778,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Cookie代码/" style="font-size: 10px;">Cookie代码</a> <a href="/tags/js练习题/" style="font-size: 10px;">js练习题</a> <a href="/tags/npm和nrm基本命令/" style="font-size: 10px;">npm和nrm基本命令</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/session代码/" style="font-size: 10px;">session代码</a> <a href="/tags/会话/" style="font-size: 10px;">会话</a>
+      <a href="/tags/Cookie代码/" style="font-size: 10px;">Cookie代码</a> <a href="/tags/js练习题/" style="font-size: 10px;">js练习题</a> <a href="/tags/npm和nrm基本命令/" style="font-size: 10px;">npm和nrm基本命令</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/promise案例/" style="font-size: 10px;">promise案例</a> <a href="/tags/session代码/" style="font-size: 10px;">session代码</a> <a href="/tags/会话/" style="font-size: 10px;">会话</a>
     </div>
   </div>
 
@@ -744,6 +800,10 @@
       <ul>
         
           <li>
+            <a href="/2019/10/16/promise案例/">promise案例</a>
+          </li>
+        
+          <li>
             <a href="/2019/10/15/js练习题/">js练习题</a>
           </li>
         
@@ -757,10 +817,6 @@
         
           <li>
             <a href="/2019/10/14/Cookie代码/">Cookie代码</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/14/会话/">会话</a>
           </li>
         
       </ul>
