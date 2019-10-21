@@ -62,6 +62,83 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Vue组件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/21/Vue组件/" class="article-date">
+  <time datetime="2019-10-21T12:19:08.000Z" itemprop="datePublished">2019-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/21/Vue组件/">Vue组件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h2><h4 id="在通信中，无论是子组件向父组件传值还是父组件向子组件传值，他们都有一个共同点就是有中间介质，子向父的介质是自定义事件，父向子的介质是props中的属性。抓准这两点对于父子通信就好理解了"><a href="#在通信中，无论是子组件向父组件传值还是父组件向子组件传值，他们都有一个共同点就是有中间介质，子向父的介质是自定义事件，父向子的介质是props中的属性。抓准这两点对于父子通信就好理解了" class="headerlink" title="在通信中，无论是子组件向父组件传值还是父组件向子组件传值，他们都有一个共同点就是有中间介质，子向父的介质是自定义事件，父向子的介质是props中的属性。抓准这两点对于父子通信就好理解了"></a>在通信中，无论是子组件向父组件传值还是父组件向子组件传值，他们都有一个共同点就是有中间介质，子向父的介质是自定义事件，父向子的介质是props中的属性。抓准这两点对于父子通信就好理解了</h4><blockquote>
+<p>   1、子组件在props中创建一个属性，用以接收父组件传过来的值</p>
+<p>   2、父组件中注册子组件</p>
+<p>   3、在子组件标签中添加子组件props中创建的属性</p>
+<p>   4、把需要传给子组件的值赋给该属性</p>
+<ul>
+<li><p>子组件在props中创建一个属性，用以接收父组件传过来的值</p>
+<p>props: [“test”]</p>
+</li>
+<li><p>父组件中注册子组件</p>
+<p><abc-d></abc-d></p>
+</li>
+<li><p>在子组件标签中添加子组件props中创建的属性，把需要传给子组件的值赋给该属性</p>
+<p><abc-d :test="name"></abc-d>  //v-bind：test=”name 简写方式:test=”name”</p>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">        &lt;abc-d :test=<span class="string">"name"</span>&gt;&lt;/abc-d&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123; name &#125;&#125;&lt;<span class="regexp">/p&gt; </span></span><br><span class="line"><span class="regexp">        &lt;input type="text" v-model="name" /</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script src="./</span>vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">    &lt;script&gt;</span></span><br><span class="line"><span class="string">        Vue.component("</span>abc-d<span class="string">", &#123;</span></span><br><span class="line"><span class="string">            template: `&lt;div&gt;123&#123;&#123; test &#125;&#125;&lt;/div&gt;`,</span></span><br><span class="line"><span class="string">            props: ["</span>test<span class="string">"]</span></span><br><span class="line"><span class="string">        &#125;);</span></span><br><span class="line"><span class="string">        var vm = new Vue(&#123;</span></span><br><span class="line">            el: "#app",</span><br><span class="line">            data: &#123;</span><br><span class="line">              name: <span class="string">"张三"</span></span><br><span class="line">            &#125;,</span><br><span class="line">            methods: &#123;&#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="子组件向父组件传值"><a href="#子组件向父组件传值" class="headerlink" title="子组件向父组件传值"></a>子组件向父组件传值</h2><h4 id="在通信中，无论是子组件向父组件传值还是父组件向子组件传值，他们都有一个共同点就是有中间介质，子向父的介质是自定义事件，父向子的介质是props中的属性。抓准这两点对于父子通信就好理解了-1"><a href="#在通信中，无论是子组件向父组件传值还是父组件向子组件传值，他们都有一个共同点就是有中间介质，子向父的介质是自定义事件，父向子的介质是props中的属性。抓准这两点对于父子通信就好理解了-1" class="headerlink" title="在通信中，无论是子组件向父组件传值还是父组件向子组件传值，他们都有一个共同点就是有中间介质，子向父的介质是自定义事件，父向子的介质是props中的属性。抓准这两点对于父子通信就好理解了"></a>在通信中，无论是子组件向父组件传值还是父组件向子组件传值，他们都有一个共同点就是有中间介质，子向父的介质是自定义事件，父向子的介质是props中的属性。抓准这两点对于父子通信就好理解了</h4><blockquote>
+<p>   1、子组件中需要以某种方式例如点击事件的方法来触发一个自定义事件<br>   2、将需要传的值作为$emit的第二个参数，该值将作为实参传给响应自定义事件的方法<br>   3、在父组件中注册子组件并在子组件标签上绑定对自定义事件的监听</p>
+<ul>
+<li><p>子组件中需要以某种方式例如点击事件的方法来触发一个自定义事件</p>
+<p>@click=”selectCity”</p>
+<p>methods: {</p>
+<pre><code>selectCity() {
+      this.$emit(&quot;clickcity&quot;, this.cityname);
+}</code></pre><p>},</p>
+</li>
+<li><p>将需要传的值作为$emit的第二个参数，该值将作为实参传给响应自定义事件的方法</p>
+<p>this.$emit(“clickcity”, this.cityname);</p>
+</li>
+<li><p>在父组件中注册子组件并在子组件标签上绑定对自定义事件的监听</p>
+<p>&lt;city-li  @clickcity=”receiveCity” &gt;</p>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt; </span><br><span class="line">    &lt;city-li @clickcity=<span class="string">"receiveCity"</span> v-<span class="keyword">for</span>=<span class="string">"item in list"</span> :cityname=<span class="string">"item"</span>&gt;&lt;/city-li&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script src="./</span>vue.js<span class="string">"&gt;&lt;/script&gt;p</span></span><br><span class="line"><span class="string">    &lt;script&gt;  </span></span><br><span class="line"><span class="string">        Vue.component("</span>city-li<span class="string">", &#123; </span></span><br><span class="line"><span class="string">            template: `&lt;div @click="</span>selectCity<span class="string">" &gt;&#123;&#123;cityname&#125;&#125;&lt;/div&gt;`,</span></span><br><span class="line"><span class="string">            props: ["</span>cityname<span class="string">", "</span>selectcityname<span class="string">"],</span></span><br><span class="line"><span class="string">            methods: &#123;</span></span><br><span class="line"><span class="string">                selectCity() &#123;</span></span><br><span class="line"><span class="string">                  // this当前组件vue实例</span></span><br><span class="line"><span class="string">                  console.log(this.cityname);</span></span><br><span class="line"><span class="string">                  //  自定义事件 $emit触发一个自定义事件 携带若干参数</span></span><br><span class="line"><span class="string">                  // this.$emit(自定义的事件名(小写),..携带参数)</span></span><br><span class="line"><span class="string">                  this.$emit("</span>clickcity<span class="string">", this.cityname);</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;,</span></span><br><span class="line"><span class="string">        &#125;);</span></span><br><span class="line"><span class="string">    var vm = new Vue(&#123;</span></span><br><span class="line">        el: "#app",</span><br><span class="line">        data: &#123;</span><br><span class="line">            list: [<span class="string">"北京"</span>, <span class="string">"上海"</span>, <span class="string">"天津"</span>],</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            receiveCity(cityname) &#123;</span><br><span class="line">                <span class="keyword">this</span>.currentcity = cityname; </span><br><span class="line">                <span class="comment">//将子组件传递过来的数据给了父组件</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/21/Vue组件/" data-id="ck20e0qyi00008ctszlnl6jvc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue组件/">Vue组件</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-promise案例" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/10/16/promise案例/" class="article-date">
@@ -109,7 +186,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/16/promise案例/" data-id="ck1u2786f0001gotsd582rkle" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/16/promise案例/" data-id="ck20e0qz000058ctsu1bnyisv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/promise案例/">promise案例</a></li></ul>
@@ -211,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/15/js练习题/" data-id="ck1u27871000egotssbp4uwbj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/15/js练习题/" data-id="ck20e0qzk000j8cts4em672lt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js练习题/">js练习题</a></li></ul>
@@ -391,7 +468,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/promise/" data-id="ck1u27874000ggotszaun46ff" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/promise/" data-id="ck20e0qzm000k8ctsey12rlk6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/promise/">promise</a></li></ul>
@@ -478,7 +555,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/session代码/" data-id="ck1u2786z000dgotsijx5qfb6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/session代码/" data-id="ck20e0qz400098cts5uamg7gc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/session代码/">session代码</a></li></ul>
@@ -564,7 +641,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/Cookie代码/" data-id="ck1u2786b0000gotszolsm458" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/Cookie代码/" data-id="ck20e0qyv00038cts8dbbv89j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cookie代码/">Cookie代码</a></li></ul>
@@ -632,7 +709,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/会话/" data-id="ck1u2786k0004gots5kgmy56h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/会话/" data-id="ck20e0qz300088ctsvtt91egv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/会话/">会话</a></li></ul>
@@ -697,7 +774,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/11/npm基本命令/" data-id="ck1u2786l0005gotszzey3u49" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/11/npm基本命令/" data-id="ck20e0qyy00048ctsullmrrfc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm和nrm基本命令/">npm和nrm基本命令</a></li></ul>
@@ -748,7 +825,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/19/hello-world/" data-id="ck1u2786j0003gots3wia17ld" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/19/hello-world/" data-id="ck20e0qyq00018cts9gd9h5l7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -771,7 +848,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie代码/">Cookie代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js练习题/">js练习题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm和nrm基本命令/">npm和nrm基本命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/promise/">promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/promise案例/">promise案例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session代码/">session代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/会话/">会话</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cookie代码/">Cookie代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue组件/">Vue组件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js练习题/">js练习题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm和nrm基本命令/">npm和nrm基本命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/promise/">promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/promise案例/">promise案例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session代码/">session代码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/会话/">会话</a></li></ul>
     </div>
   </div>
 
@@ -781,7 +858,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Cookie代码/" style="font-size: 10px;">Cookie代码</a> <a href="/tags/js练习题/" style="font-size: 10px;">js练习题</a> <a href="/tags/npm和nrm基本命令/" style="font-size: 10px;">npm和nrm基本命令</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/promise案例/" style="font-size: 10px;">promise案例</a> <a href="/tags/session代码/" style="font-size: 10px;">session代码</a> <a href="/tags/会话/" style="font-size: 10px;">会话</a>
+      <a href="/tags/Cookie代码/" style="font-size: 10px;">Cookie代码</a> <a href="/tags/Vue组件/" style="font-size: 10px;">Vue组件</a> <a href="/tags/js练习题/" style="font-size: 10px;">js练习题</a> <a href="/tags/npm和nrm基本命令/" style="font-size: 10px;">npm和nrm基本命令</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/promise案例/" style="font-size: 10px;">promise案例</a> <a href="/tags/session代码/" style="font-size: 10px;">session代码</a> <a href="/tags/会话/" style="font-size: 10px;">会话</a>
     </div>
   </div>
 
@@ -803,6 +880,10 @@
       <ul>
         
           <li>
+            <a href="/2019/10/21/Vue组件/">Vue组件</a>
+          </li>
+        
+          <li>
             <a href="/2019/10/16/promise案例/">promise案例</a>
           </li>
         
@@ -816,10 +897,6 @@
         
           <li>
             <a href="/2019/10/14/session代码/">session代码</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/14/Cookie代码/">Cookie代码</a>
           </li>
         
       </ul>
